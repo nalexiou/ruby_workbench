@@ -20,3 +20,10 @@ end
 def add_authors( *names )
   @author += " #{names.join(' ')}"
 end
+
+#hash parameter example
+load_font( { :name => 'times roman', :size => 12 })
+#can be shorten to this
+load_font( :name => 'times roman', :size => 12 )
+#can be further shorten to this
+load_font :name => 'times roman', :size => 12
