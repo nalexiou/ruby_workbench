@@ -27,3 +27,26 @@ load_font( { :name => 'times roman', :size => 12 })
 load_font( :name => 'times roman', :size => 12 )
 #can be further shorten to this
 load_font :name => 'times roman', :size => 12
+
+#arbitrary quote mechanism same as using single quotes (note lower case q)
+str = %q{I said "I cannot deal with 's and "s."}
+#arbitrary quote mechanism same as using double quotes (note upper case Q)
+str = %Q<The is now #{Time.now}>
+
+#here document example spans over multiple lines
+heres_one = <<EOF
+This is the beginning of my here document.
+And this is the end.
+EOF
+
+#strings are collections of things
+str.each_char #collection of characters
+str.each_byte #collection of bytes
+str.each_line #collection of lines
+
+#strings are mutable data structures
+first_name = "Nick"
+given_name = first_name
+first_name = "Some other name" #this changes given_name as well
+
+
