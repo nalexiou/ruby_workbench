@@ -49,4 +49,6 @@ first_name = "Nick"
 given_name = first_name
 first_name = "Some other name" #this changes given_name as well
 
+#regex for ruby - this matches beginning of line, end and new lines for the askerisk (/m modifier)
+/^Once upon a time.*hapilly ever after\.$/m
 
