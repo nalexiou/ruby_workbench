@@ -52,3 +52,67 @@ first_name = "Some other name" #this changes given_name as well
 #regex for ruby - this matches beginning of line, end and new lines for the askerisk (/m modifier)
 /^Once upon a time.*hapilly ever after\.$/m
 
+#classes and objects in ruby
+class Document
+	# A method
+	def words
+		@content.split
+	end
+	# And another one
+ 	def word_count
+		words.size
+ 	end
+	#example of self
+ 	def about_me
+		puts "I am #{self}"
+		puts "My title is #{self.title}"
+		puts "I have #{self.word_count} words"
+	end
+end
+#everything is a class
+-3.abs
+"abc".upcase
+:abc.length
+/abc/.class
+true.class
+false.nil?
+nil.class
+
+#simple irb loop
+while true
+  print "Cmd> "
+  cmd = gets
+  puts( eval( cmd ) )
+end
+
+#private methods
+class Document
+  # Most of the class omitted
+	private  # Methods are private starting here
+	def word_count
+		return words.size
+	end 
+end
+
+class Document
+  # Most of the class omitted
+	def word_count
+		return words.size
+	end
+	private :word_count
+end
+
+
+class Document
+  # Most of the class omitted...
+	def word_count
+		return words.size
+	end
+	private :word_count
+  # This method works because self is the right thing,
+  # the document instance, when you call it.
+	def print_word_count
+		n = word_count
+		puts "The number of words is #{word_count}"
+	end
+end
