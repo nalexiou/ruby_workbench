@@ -161,7 +161,7 @@ end
 
 #don't do this!
 def initialize( String title, String author, String content )
-	
+
 #don't do this!
 class Doc
 	attr_accessor :ttl, :au, :c
@@ -169,4 +169,129 @@ class Doc
 		@ttl = ttl; @au = au; @c = c
 	end
   def wds;  @c.split; end
+end
+
+
+#moving onto testing
+def test_document_holds_onto_contents
+	text = 'A bunch of words'
+	doc = Document.new('test', 'nobody', text)
+	assert_equal text, doc.content, 'Contents are still there'
+end
+
+#complete initial test example
+
+require 'test/unit'
+require 'document.rb'
+class DocumentTest < Test::Unit::TestCase
+	def test_document_holds_onto_contents
+		text = 'A bunch of words'
+		doc = Document.new('test', 'nobody', text)
+		assert_equal text, doc.content, 'Contents are still there'
+	end
+	def test_that_doc_can_return_words_in_array
+		text = 'A bunch of words'
+		doc = Document.new('test', 'nobody', text)
+		assert doc.words.include?( 'A' )
+		assert doc.words.include?( 'bunch' )
+		assert doc.words.include?( 'of' )
+		assert doc.words.include?( 'words' )
+	end
+	def test_that_word_count_is_correct
+		text = 'A bunch of words'
+		doc = Document.new('test', 'nobody', text)
+		assert_equal 4, doc.word_count, 'Word count is correct'
+	end 
+end
+
+#better test with setup
+
+class DocumentTest < Test::Unit::TestCase
+	def setup
+		@text = 'A bunch of words'
+		@doc = Document.new('test', 'nobody', @text)
+	end
+	def test_that_document_holds_onto_contents
+		assert_equal @text, @doc.content, 'Contents are still there'
+	end
+	def test_that_doc_can_return_words_in_array
+		assert @doc.words.include?( 'A' )
+		assert @doc.words.include?( 'bunch' )
+		assert @doc.words.include?( 'of' )
+		assert @doc.words.include?( 'words' )
+	end
+	def test_that_word_count_is_correct
+		assert_equal 4, @doc.word_count, 'Word count is correct'
+	end 
+end
+
+#same test in RSpec
+describe Document do
+	it 'should hold on to the contents' do
+		text = 'A bunch of words'
+		doc = Document.new( 'test', 'nobody', text )
+		doc.content.should == text
+	end
+		it 'should return all of the words in the document' do
+		text = 'A bunch of words'
+		doc = Document.new( 'test', 'nobody', text )
+		doc.words.include?( 'A' ).should == true
+		doc.words.include?( 'bunch' ).should == true
+		doc.words.include?( 'of' ).should == true
+		doc.words.include?( 'words' ).should == true
+	end
+	it 'should know how many words it contains' do
+		text = 'A bunch of words'
+		doc = Document.new( 'test', 'nobody', text )
+		doc.word_count.should == 4
+	end 
+end
+
+#shorter RSpec version
+require 'document'
+	describe Document do
+		before :each do
+		@text = 'A bunch of words'
+		@doc = Document.new( 'test', 'nobody', @text )
+	end
+	it 'should hold on to the contents' do
+		@doc.content.should == @text
+	end
+	it 'should know which words it has' do
+		@doc.words.should include( 'A' )
+		@doc.words.should include( 'bunch' )
+		@doc.words.should include( 'of' )
+		@doc.words.should include( 'words' )
+	end
+	it 'should know how many words it contains' do
+		@doc.word_count.should == 4
+	end 
+end
+
+#stub example
+describe PrintableDocument do
+	before :each do
+		@text = 'A bunch of words'
+		@doc = PrintableDocument.new( 'test', 'nobody', @text )
+	end
+	it 'should know how to print itself' do
+		stub_printer = stub :available? => true, :render => nil
+		@doc.print( stub_printer ).should == 'Done' 
+	end
+	it 'should return the proper string if printer is offline' do
+		stub_printer = stub :available? => false, :render => nil
+		@doc.print( stub_printer ).should == 'Printer unavailable' 
+	end
+end
+
+#stub! example
+apparently_long_string = 'actually short'
+apparently_long_string.stub!( :length ).and_return( 1000000 )
+
+#mock example
+it 'should know how to print itself' do
+	mock_printer = mock('Printer')
+	mock_printer.should_receive(:available?).and_return(true)
+	mock_printer.should_receive(:render).exactly(3).times
+	@doc.print( mock_printer ).should == 'Done'
 end
