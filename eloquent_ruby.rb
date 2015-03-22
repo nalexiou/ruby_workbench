@@ -116,3 +116,57 @@ class Document
 		puts "The number of words is #{word_count}"
 	end
 end
+
+#clean and precise code - ruby uses dynamic typing/extreme decoupling
+class Document
+  # Body of the class unchanged...
+end
+class LazyDocument
+  # Body of the class unchanged...
+end
+
+class Title
+	attr_reader :long_name, :short_name
+	attr_reader :isbn
+	def initialize(long_name, short_name, isbn)
+		@long_name = long_name
+		@short_name = short_name
+		@isbn = isbn
+	end 
+end
+
+class Author
+	attr_reader :first_name, :last_name
+	def initialize( first_name, last_name )
+		@first_name = first_name
+		@last_name = last_name
+	end 
+end
+
+#this will still work - nothing to change in Document class
+two_cities = Title.new( 'A Tale Of Two Cities',
+                        '2 Cities', '0-999-99999-9' )
+dickens = Author.new( 'Charles', 'Dickens' )
+doc = Document.new( two_cities, dickens, 'It was the best...' )
+
+#don't do this!
+def initialize( title, author, content )
+  raise "title isn't a String" unless title.kind_of? String
+  raise "author isn't a String" unless author.kind_of? String
+  raise "content isn't a String" unless content.kind_of? String
+  @title = title
+  @author = author
+  @content = content
+end
+
+#don't do this!
+def initialize( String title, String author, String content )
+	
+#don't do this!
+class Doc
+	attr_accessor :ttl, :au, :c
+		def initialize(ttl, au, c)
+		@ttl = ttl; @au = au; @c = c
+	end
+  def wds;  @c.split; end
+end
