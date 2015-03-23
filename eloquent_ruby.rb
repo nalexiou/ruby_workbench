@@ -295,3 +295,80 @@ it 'should know how to print itself' do
 	mock_printer.should_receive(:render).exactly(3).times
 	@doc.print( mock_printer ).should == 'Done'
 end
+
+#ruby classes and methods
+#simple compressing/archiving code
+class TextCompressor
+	attr_reader :unique, :index
+	def initialize( text )
+		@unique = []
+		@index = []
+		words = text.split
+		words.each do |word|
+			i = @unique.index( word )
+			if i
+				@index << i
+			else
+			    @unique << word
+			    @index << unique.size - 1
+			end
+		end 
+	end
+end
+
+#improved version
+class TextCompressor
+	attr_reader :unique, :index
+	def initialize( text )
+		@unique = []
+		@index = []
+		words = text.split
+		words.each do |word|
+			i = @unique_index_of( word )
+			if i
+				@index << i
+			else
+			    @index << add_unique_word( word )
+			end
+		end 
+	end
+
+	def unique_index_of( word)
+		@unique.index(word)
+	end
+
+	def add_unique_word(word)
+		@unique << word
+		unique.size - 1
+	end
+end
+
+#another shot
+class 
+	attr_reader :unique, :index
+
+	def initialize( text )
+		@unique = []
+		@index = []
+		add_text( text )
+	end
+
+	def add_text( text )
+		words = text.split
+		words.each do { |word| add_word ( word ) }
+	end
+
+	def add_word ( word )
+			i = @unique_index_of( word ) || add_unique_word( word )
+				@index << i
+	end
+
+	def unique_index_of( word)
+		@unique.index(word)
+	end
+
+	def add_unique_word(word)
+		@unique << word
+		unique.size - 1
+	end
+end
