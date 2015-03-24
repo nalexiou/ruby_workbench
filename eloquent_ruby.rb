@@ -395,3 +395,34 @@ describe TextCompressor do
 		c.unique_index_of( 'world' ).should == 1
 	end
 end
+
+#user-defined operators
+class Document
+  # Most of the class omitted...
+	def +(other)
+		Document.new( title, author, "#{content} #{other.content}" )
+	end
+end
+
+#now we can do this!
+doc1 = Document.new('Tag Line1', 'Kirk', "These are the voyages")
+doc2 = Document.new('Tag Line2', 'Kirk', "of the star ship ...")
+total_document = doc1 + doc2
+puts total_document.content #prints: These are the voyages of the star ship ...
+
+#user-defined ! operator
+
+class Document
+  # Stuff omitted...
+	def !
+	Document.new( title, author, "It is not true: #{content}")
+	end 
+end
+
+favorite = Document.new( 'Favorite', 'Russ', 'Chocolate is best')
+
+!favorite # will print: It is not true: Chocolate is the best
+
+
+
+
