@@ -423,6 +423,20 @@ favorite = Document.new( 'Favorite', 'Russ', 'Chocolate is best')
 
 !favorite # will print: It is not true: Chocolate is the best
 
+#unary operator
+class Document
+# Most of the class taking a break...
+	def +@
+		Document.new( title, author, "I am sure that #{@content}" )
+	end
+	def -@
+		Document.new( title, author, "I doubt that #{@content}" )
+	end 
+end
+
+favorite = Document.new('Favorite', 'Russ', 'Chocolate is best')
+unsure = -(+favorite) #unsure will be: I doubt that I am sure that Chocolate is best
+
 
 
 
