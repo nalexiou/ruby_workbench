@@ -437,6 +437,62 @@ end
 favorite = Document.new('Favorite', 'Russ', 'Chocolate is best')
 unsure = -(+favorite) #unsure will be: I doubt that I am sure that Chocolate is best
 
+#ruby equality operators
 
+#we could do this...
+class DocumentIdentifier
+	attr_reader :folder, :name
+	def initialize( folder, name )
+		@folder = folder
+		@name = name
+	end
+	def ==(other)
+		return true if other.equal?(self)
+		return false unless other.kind_of?(self.class)
+		folder == other.folder && name == other.name
+	end 
+end
 
+class ContractIdentifier < DocumentIdentifier
+end
 
+doc_id =  DocumentIdentifier.new( 'contracts', 'Book Deal' )
+con_id =  ContractIdentifier.new( 'contracts', 'Book Deal' )
+
+#then using ==
+
+doc_id == con_id #this will return true
+
+#this is a little better
+class DocumentPointer
+	attr_reader :folder, :name
+	def initialize( folder, name )
+		@folder = folder
+		@name = name
+	end
+	def ==(other)
+		return false unless other.respond_to?(:folder) 
+		return false unless other.respond_to?(:name) 
+		folder == other.folder && name == other.name
+	end 
+end
+
+#watch out for assymetry!
+
+doc_id = DocumentIdentifier.new( 'secret/area51', 'phone list' )
+pointer = DocumentPointer .new('secret/area51', 'phone list' )
+
+pointer == doc_id # True
+doc_id == pointer # Not True
+
+#equality user-defined for hash
+class DocumentIdentifier
+  # Code omitted...
+	def hash
+		folder.hash ^ name.hash
+	end
+	def eql?(other)
+		return false unless other.instance_of?(self.class)
+		folder == other.folder && name == other.name
+	end
+end
