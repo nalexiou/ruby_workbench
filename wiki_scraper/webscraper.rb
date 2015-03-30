@@ -45,13 +45,13 @@ begin
 			 	budget_amount_match = budget.match(/#{currency_symbol}([\d,.]+)(?:[\–\-])?(\d)?\s?(million)?/i)
 
 			 	if !budget_amount_match.nil?
-			 		if budget_amount_match[3].nil?
+			 		if budget_amount_match[3].nil? #use amount as is
 			 			budget_total += budget_amount_match[1].gsub(/[^\d^\.]/, '').to_f * exchange_rate
 			 		else
-			 			if budget_amount_match[2].nil?
+			 			if budget_amount_match[2].nil? #amount in millions
 			 				budget_total += (budget_amount_match[1].to_f * 1000000 * exchange_rate) if budget_amount_match[3].downcase == "million"
 			 			
-			 			else
+			 			else #amount in millions range
 			 				range_avg = (budget_amount_match[2].to_f + budget_amount_match[1].to_f)/2
 			 				budget_total += (range_avg * 1000000 * exchange_rate) if budget_amount_match[3].downcase == "million"
 			 			end
