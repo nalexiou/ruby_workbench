@@ -68,7 +68,7 @@ begin
 		#----Average film budget calculation
 			average_budget = (budget_total / film_count).round
 			average_budget = average_budget.to_s.reverse.scan(/\d{3}|.+/).join(",").reverse
-		puts "Average budget: $#{average_budget}"
+		puts "Average film budget: $#{average_budget}"
 		file.write("Average budget: $#{average_budget}\n")
 	end
 rescue => e
