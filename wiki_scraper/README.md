@@ -6,11 +6,11 @@ This program assumes that you will be using Mac OS. To run the code, download/cl
 
         # Open a terminal window and navigate to the directory where you downloaded source code
 
-        cd /path/to/sourcecode/directory
+        	cd /path/to/sourcecode/directory
 
         #Run the program
 
-        ruby webscraper.rb
+        	ruby webscraper.rb
 
 REQUIREMENTS
 
@@ -28,6 +28,4 @@ and then switch to Ruby 2.1.3 using this command:
 
 		rvm use 2.1.3
 
-If you do not have RVM installed, do so by following instructions here:
-
-	[RVM](https://rvm.io/rvm/install)
+If you do not have RVM installed, do so by following instructions here: [RVM](https://rvm.io/rvm/install)
