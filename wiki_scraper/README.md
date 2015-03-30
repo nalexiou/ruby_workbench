@@ -14,9 +14,9 @@ This program assumes that you will be using Mac OS. To run the code, download/cl
 
 REQUIREMENTS
 
-Please note that this program requires the nokogiri gem. To install it, run this command:
+Please note that this program requires the nokogiri gem (version 1.6.6.2). To install it, run this command:
 
-        gem install nokogiri
+        gem install nokogiri -v 1.6.6.2
 
 Also, code was written using Ruby 2.1.3
 
