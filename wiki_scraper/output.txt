@@ -1,4 +1,4 @@
-Year: 1927/28 | Title: Wings | Budget: US$2 million
+Year: 1927/28 | Title: Wings | Budget: $2 million
 Year: 1928/29 | Title: The Broadway Melody | Budget: Not Available
 Year: 1929/30 | Title: All Quiet on the Western Front | Budget: $1.2 million
 Year: 1930/31 | Title: Cimarron | Budget: $1,433,000
@@ -8,7 +8,7 @@ Year: 1934 | Title: It Happened One Night | Budget: $325,000
 Year: 1935 | Title: Mutiny on the Bounty | Budget: $1,950,000
 Year: 1936 | Title: The Great Ziegfeld | Budget: $2.183 million
 Year: 1937 | Title: The Life of Emile Zola | Budget: Not Available
-Year: 1938 | Title: You Can't Take It With You | Budget: US$1,644,736 (est.)
+Year: 1938 | Title: You Can't Take It With You | Budget: $1,644,736
 Year: 1939 | Title: Gone with the Wind | Budget: $3.85 million
 Year: 1940 | Title: Rebecca | Budget: $1,288,000
 Year: 1941 | Title: How Green Was My Valley | Budget: $800,000
@@ -27,13 +27,13 @@ Year: 1953 | Title: From Here to Eternity | Budget: $1,650,000
 Year: 1954 | Title: On the Waterfront | Budget: $910,000
 Year: 1955 | Title: Marty | Budget: $350,000
 Year: 1956 | Title: Around the World in 80 Days | Budget: $6 million
-Year: 1957 | Title: The Bridge on the River Kwai | Budget: $2,840,000.
+Year: 1957 | Title: The Bridge on the River Kwai | Budget: $2,840,000
 Year: 1958 | Title: Gigi | Budget: $3,319,355
 Year: 1959 | Title: Ben-Hur | Budget: $15.2 million
 Year: 1960 | Title: The Apartment | Budget: $3 million
 Year: 1961 | Title: West Side Story | Budget: $6 million
 Year: 1962 | Title: Lawrence of Arabia | Budget: $15 million
-Year: 1963 | Title: Tom Jones | Budget: $1 million or £467,000
+Year: 1963 | Title: Tom Jones | Budget: $1 million
 Year: 1964 | Title: My Fair Lady | Budget: $17 million
 Year: 1965 | Title: The Sound of Music | Budget: $8.2 million
 Year: 1966 | Title: A Man for All Seasons | Budget: $2 million
@@ -64,7 +64,7 @@ Year: 1990 | Title: Dances with Wolves | Budget: $22 million
 Year: 1991 | Title: The Silence of the Lambs | Budget: $19 million
 Year: 1992 | Title: Unforgiven | Budget: $14.4 million
 Year: 1993 | Title: Schindler's List | Budget: $22 million
-Year: 1994 | Title: Forrest Gump | Budget: $55 million
+Year: 1994 | Title: Forrest Gump | Budget: $55 million
 Year: 1995 | Title: Braveheart | Budget: $72 million
 Year: 1996 | Title: The English Patient | Budget: $27 million
 Year: 1997 | Title: Titanic | Budget: $200 million
@@ -80,9 +80,9 @@ Year: 2006 | Title: The Departed | Budget: $90 million
 Year: 2007 | Title: No Country for Old Men | Budget: $25 million
 Year: 2008 | Title: Slumdog Millionaire | Budget: $15 million
 Year: 2009 | Title: The Hurt Locker | Budget: $15 million
-Year: 2010 | Title: The King's Speech | Budget: £8 million ($15 million)
+Year: 2010 | Title: The King's Speech | Budget: $15 million
 Year: 2011 | Title: The Artist | Budget: $15 million
 Year: 2012 | Title: Argo | Budget: $44.5 million
 Year: 2013 | Title: 12 Years a Slave | Budget: $22 million
 Year: 2014 | Title: Birdman | Budget: $16.5 million
-Average budget: $16,920,630
+Average budget: $17,242,331
