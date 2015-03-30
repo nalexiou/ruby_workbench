@@ -5,25 +5,23 @@ require 'open-uri'
 BASE_WIKIPEDIA_URL = "http://en.wikipedia.org"
 AWARDS_URL = "#{BASE_WIKIPEDIA_URL}/wiki/Academy_Award_for_Best_Picture"
 
+
 File.open("output.txt", 'w') do |file| 
 	page = Nokogiri::HTML(open(AWARDS_URL))
 
-	rows = page.css("div.mw-content-ltr table.wikitable tr:eq(2)") 
+	winner_rows = page.css("div.mw-content-ltr table.wikitable tr:eq(2)") 
 
-	puts rows.class
 	budget_total = 0
 	budget_count = 0
-	rows.each do |row|
-		 hrefs = row.css("td:eq(1) a[href^='/wiki']").map {|a|
-		 	a['href'] if a['href'].match("/wiki")
-		 }.uniq
-		 hrefs.each do |href|
-		 	remoteurl = BASE_WIKIPEDIA_URL + href
-		 	wiki_film_page = Nokogiri::HTML(open(remoteurl))
 
+	winner_rows.each do |row|
+		 hrefs = row.css("td:eq(1) a[href^='/wiki']").map{|a| a['href']}
+		 hrefs.each do |href|
+		 	winner_link_url = BASE_WIKIPEDIA_URL + href
+		 	wiki_film_page = Nokogiri::HTML(open(winner_link_url))
 		 	#----Title extraction----
-		 	title = wiki_film_page.css('table.infobox th.summary').first.text.strip.gsub("\n"," ")
-		 	
+		 	title = wiki_film_page.css('table.infobox th.summary').first.text
+		 	title = title.strip.gsub("\n"," ")
 		 	#----Film Release year extraction----
 		 	release_date_data = wiki_film_page.css('table.infobox tr:contains("Release dates") td').text.strip
 		 	release_year_match = release_date_data.match(/\d{4}/)
@@ -37,18 +35,18 @@ File.open("output.txt", 'w') do |file|
 		 	budget = wiki_film_page.css('table.infobox tr:contains("Budget") td').text.strip.gsub(/\[.\]/,'')
 		 	budget = "Not Available" if budget ==""
 
-		 	budget_usdollars_match = budget.match(/\$([\d,.]+)(?:[\–\-])?(\d)?\s?(million)?/i)
+		 	budget_amount_match = budget.match(/\$([\d,.]+)(?:[\–\-])?(\d)?\s?(million)?/i)
 
-		 	if !budget_usdollars_match.nil?
-		 		if budget_usdollars_match[3].nil?
-		 			budget_total += budget_usdollars_match[1].gsub(/[^\d^\.]/, '').to_f
+		 	if !budget_amount_match.nil?
+		 		if budget_amount_match[3].nil?
+		 			budget_total += budget_amount_match[1].gsub(/[^\d^\.]/, '').to_f
 		 		else
-		 			if budget_usdollars_match[2].nil?
-		 				budget_total += (budget_usdollars_match[1].to_f * 1000000) if budget_usdollars_match[3].downcase == "million"
+		 			if budget_amount_match[2].nil?
+		 				budget_total += (budget_amount_match[1].to_f * 1000000) if budget_amount_match[3].downcase == "million"
 		 			
 		 			else
-		 				range_avg = (budget_usdollars_match[2].to_f + budget_usdollars_match[1].to_f)/2
-		 				budget_total += (range_avg * 1000000) if budget_usdollars_match[3].downcase == "million"
+		 				range_avg = (budget_amount_match[2].to_f + budget_amount_match[1].to_f)/2
+		 				budget_total += (range_avg * 1000000) if budget_amount_match[3].downcase == "million"
 		 			end
 		 		end
 				budget_count += 1
