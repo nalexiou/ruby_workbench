@@ -85,4 +85,4 @@ Year: 2011 | Title: The Artist | Budget: $15 million
 Year: 2012 | Title: Argo | Budget: $44.5 million
 Year: 2013 | Title: 12 Years a Slave | Budget: $22 million
 Year: 2014 | Title: Birdman | Budget: $16.5 million
-Average budget: $17,242,331
+Average film budget: $17,242,331

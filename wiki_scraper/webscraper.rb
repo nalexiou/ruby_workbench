@@ -25,7 +25,7 @@ begin
 
 			 	#----Title extraction----
 			 	title = wiki_film_page.css('table.infobox th.summary').first.text
-			 	title = title.strip.gsub("\n"," ")
+			 	title = title.strip.gsub(/\r\n|\n|\r/," ")
 
 			 	#----Film Award Year extraction----
 			 		award_year = row.ancestors("table").first.css("caption big").text
