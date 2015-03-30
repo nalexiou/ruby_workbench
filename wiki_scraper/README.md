@@ -1,6 +1,6 @@
 # webscraper
 
-This Ruby program scrapes Wikipedia some data for all Academy Award Winners for Best Picture. It will print out to the terminal the film info (year, title, budget) as well as as output this information to a text file. It calculates the average budget using all films for which the budget amount is given in the summary table of each film. Please note that when only a UK Pound budget was provided, the amount was converted to US Dollars using a standard exhange rate.
+This Ruby program scrapes Wikipedia for all Academy Award Winners for Best Picture. It will print out to the terminal the film info (year, title, budget) as well as output this information to a text file. It calculates the average budget using all films for which the budget amount is given in the summary table of each film. Please note that when only a UK Pound budget was provided, the amount was converted to US Dollars using a standard exhange rate.
 
 This program assumes that you will be using Mac OS. To run the code, download/clone the repository and follow the steps below:
 
