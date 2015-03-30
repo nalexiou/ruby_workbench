@@ -22,15 +22,9 @@ File.open("output.txt", 'w') do |file|
 		 	#----Title extraction----
 		 	title = wiki_film_page.css('table.infobox th.summary').first.text
 		 	title = title.strip.gsub("\n"," ")
-		 	#----Film Release year extraction----
-		 	release_date_data = wiki_film_page.css('table.infobox tr:contains("Release dates") td').text.strip
-		 	release_year_match = release_date_data.match(/\d{4}/)
-		 	if !release_year_match.nil? then
-		 		release_year = release_year_match[0]
-		 	else
-		 		release_year = row.ancestors("table").first.css("caption big").text
-		 	end
-
+		 	#----Film Award Year extraction----
+		 		award_year = row.ancestors("table").first.css("caption big").text
+		 		award_year = award_year.match(/\d{4}(?:\/\d{2})?/)[0]
 		 	#----Budget extraction----
 		 	budget = wiki_film_page.css('table.infobox tr:contains("Budget") td').text.strip.gsub(/\[.\]/,'')
 		 	budget = "Not Available" if budget ==""
@@ -52,8 +46,8 @@ File.open("output.txt", 'w') do |file|
 				budget_count += 1
 		 	end
 
-		 	p "Year: #{release_year} | Title: #{title} | Budget: #{budget}"
-		 	file.write("Year: #{release_year} | Title: #{title} | Budget: #{budget}\n")
+		 	p "Year: #{award_year} | Title: #{title} | Budget: #{budget}"
+		 	file.write("Year: #{award_year} | Title: #{title} | Budget: #{budget}\n")
 		 end
 	end
 		average_budget = (budget_total / budget_count).round

@@ -1,9 +1,9 @@
-Year: 1927 | Title: Wings | Budget: US$2 million
-Year: 1929 | Title: The Broadway Melody | Budget: Not Available
-Year: 1930 | Title: All Quiet on the Western Front | Budget: $1.2 million
-Year: 1931 | Title: Cimarron | Budget: $1,433,000
-Year: 1932 | Title: Grand Hotel | Budget: $750,000
-Year: 1933 | Title: Cavalcade | Budget: $1,180,280
+Year: 1927/28 | Title: Wings | Budget: US$2 million
+Year: 1928/29 | Title: The Broadway Melody | Budget: Not Available
+Year: 1929/30 | Title: All Quiet on the Western Front | Budget: $1.2 million
+Year: 1930/31 | Title: Cimarron | Budget: $1,433,000
+Year: 1931/32 | Title: Grand Hotel | Budget: $750,000
+Year: 1932/33 | Title: Cavalcade | Budget: $1,180,280
 Year: 1934 | Title: It Happened One Night | Budget: $325,000
 Year: 1935 | Title: Mutiny on the Bounty | Budget: $1,950,000
 Year: 1936 | Title: The Great Ziegfeld | Budget: $2.183 million
@@ -13,7 +13,7 @@ Year: 1939 | Title: Gone with the Wind | Budget: $3.85 million
 Year: 1940 | Title: Rebecca | Budget: $1,288,000
 Year: 1941 | Title: How Green Was My Valley | Budget: $800,000
 Year: 1942 | Title: Mrs. Miniver | Budget: $1.34 million
-Year: 1942 | Title: Casablanca | Budget: $878,000
+Year: 1943 | Title: Casablanca | Budget: $878,000
 Year: 1944 | Title: Going My Way | Budget: Not Available
 Year: 1945 | Title: The Lost Weekend | Budget: $1.25 million
 Year: 1946 | Title: The Best Years of Our Lives | Budget: $2.1 million
@@ -75,11 +75,11 @@ Year: 2001 | Title: A Beautiful Mind | Budget: $58 million
 Year: 2002 | Title: Chicago | Budget: $45 million
 Year: 2003 | Title: The Lord of the Rings: The Return of the King | Budget: $94 million
 Year: 2004 | Title: Million Dollar Baby | Budget: $30 million
-Year: 2004 | Title: Crash | Budget: $6.5 million
+Year: 2005 | Title: Crash | Budget: $6.5 million
 Year: 2006 | Title: The Departed | Budget: $90 million
 Year: 2007 | Title: No Country for Old Men | Budget: $25 million
 Year: 2008 | Title: Slumdog Millionaire | Budget: $15 million
-Year: 2008 | Title: The Hurt Locker | Budget: $15 million
+Year: 2009 | Title: The Hurt Locker | Budget: $15 million
 Year: 2010 | Title: The King's Speech | Budget: £8 million ($15 million)
 Year: 2011 | Title: The Artist | Budget: $15 million
 Year: 2012 | Title: Argo | Budget: $44.5 million
