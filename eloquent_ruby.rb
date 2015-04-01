@@ -517,3 +517,9 @@ class << hand_built_stub_printer
 	end
 end
 
+#class methods are Singleton methods!
+def Document.explain
+  puts "self is #{self}"
+  puts "and its class is #{self.class}"
+end
+
