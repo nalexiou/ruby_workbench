@@ -496,3 +496,24 @@ class DocumentIdentifier
 		folder == other.folder && name == other.name
 	end
 end
+
+#singleton methods - define: instance.method_name
+
+hand_built_stub_printer = Object.new
+def hand_built_stub_printer.available?
+	true 
+end
+def hand_built_stub_printer.render( content )
+	nil 
+end
+
+#alternate definition
+class << hand_built_stub_printer
+	def available?
+		true
+	end
+	def render
+		nil
+	end
+end
+
