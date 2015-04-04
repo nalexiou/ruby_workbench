@@ -523,3 +523,11 @@ def Document.explain
   puts "and its class is #{self.class}"
 end
 
+#class instance variables
+class Document
+	@default_font = :times
+	class << self
+		attr_accessor :default_font
+	end
+# Rest of the class omitted...
+end
