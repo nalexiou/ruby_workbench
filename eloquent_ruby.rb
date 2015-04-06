@@ -533,3 +533,148 @@ class Document
 end
 
 #modules as name spaces
+
+module Rendering
+	class Font
+	attr_accessor :name, :weight, :size
+	def initialize( name, weight=:normal, size=10 )
+		@name = name
+		@weight = weight
+		@size = size
+	end
+    # Rest of the class omitted...
+  end
+	class PaperSize
+	attr_accessor :name, :width, :height
+		def initialize( name='US Let', width=8.5, height=11.0 )
+			@name = name
+			@width = width
+			@height = height
+		end
+	# Rest of the class omitted...
+	end
+end
+
+#To access font class, syntax is: Rendering::Font
+
+#set constants in module
+module Rendering
+	# Font and PaperSize classes omitted...
+	DEFAULT_FONT = Font.new( 'default' )
+	DEFAULT_PAPER_SIZE = PaperSize.new
+end
+
+#To access constant, syntax is: Rendering::DEFAULT_FONT
+#If you include the module (include Rendering), then you can access directly: DEFAULT_FONT
+
+#Nested modules
+
+module WordProcessor
+		module Rendering
+			class Font
+			  # Guts of class omitted...
+			end
+			# and so on...
+		end
+end
+
+#To access nested, syntax is: WordProcessor::Rendering::Font
+
+#methods inside Modules
+
+module WordProcessor
+	def self.points_to_inches( points )
+		points / 72.0
+	end
+	def self.inches_to_points( inches )
+		inches * 72.0
+	end
+	# Rest of the module omitted
+end
+
+#Calling methods defined in modules
+an_inch_full_of_points = WordProcessor.inches_to_points( 1.0 )
+#this also works: WordProcessor::inches_to_points but is not preferred
+
+#Treat modules as objects
+
+#we can do this:
+
+class TonsOTonerPrintQueue
+	def submit( print_job )
+	# Send the job off for printing to this laser printer...
+	end
+	def cancel( print_job)
+	# Stop the print job on this laser printer...
+	end 
+end
+class TonsOTonerAdministration
+	def power_off
+	# Turn this laser printer off...
+	end
+	def start_self_test
+	# Test this laser printer...
+	end 
+end
+
+class OceansOfInkPrintQueue
+	def submit( print_job )
+	# Send the job off for printing to this ink jet printer...
+	end
+	def cancel( print_job)
+	# Stop the print job on this ink jet printer...
+	end 
+end
+class OceansOfInkAdministration
+	def power_off
+	# Turn this ink jet printer off...
+	end
+	def start_self_test
+	# Test this ink jet printer...
+	end 
+end
+
+#A better way is to use modules:
+
+module TonsOToner
+	class PrintQueue
+		def submit( print_job )
+		  # Send the job off for printing to this laser printer
+		end
+		def cancel( print_job)
+		  # Stop!
+		end 
+	end
+	class Administration
+		def power_off
+		# Turn this laser printer off...
+		end
+		def start_self_test
+		  # Everything ok?
+		end 
+	end
+end
+
+module OceansOfInk
+	class PrintQueue
+		def submit( print_job )
+		# Send the job off for printing to this ink jet printer
+		end
+	# Rest omitted...
+	end
+	class Administration
+	#  Ink jet administration code omitted...
+	end 
+end
+
+#then we can do this:
+
+	if use_laser_printer
+	  print_module = TonsOToner
+	else
+	  print_module = OceansOfInk
+	end
+# Later...
+	admin = print_module::Administration.new
+
+	
