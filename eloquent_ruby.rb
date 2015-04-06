@@ -531,3 +531,5 @@ class Document
 	end
 # Rest of the class omitted...
 end
+
+#modules as name spaces
