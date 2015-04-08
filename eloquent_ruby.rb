@@ -679,5 +679,59 @@ end
 
 
 #Modules as mixins
+module WritingQuality
+	CLICHES = [ /play fast and loose/,
+	          /make no mistake/,
+	          /does the trick/,
+	          /off and running/,
+	          /my way or the highway/ ]
+	def number_of_cliches
+		CLICHES.inject(0) do |count, phrase|
+			count += 1 if phrase =~ content
+			count 
+		end
+	end 
+end
 
+class Document
+	include WritingQuality
+	# Lots of stuff omitted...
+end
 
+class ElectronicBook < ElectronicText
+	include WritingQuality
+	# Lots of stuff omitted...
+end
+
+#Now, the number_of_cliches method becomes available in both classes
+text = "my way or the highway does the trick"
+my_tome = Document.new('Hackneyed', 'Russ', text)
+puts my_tome.number_of_cliches
+
+my_ebook = ElectronicBook.new( 'EHackneyed', 'Russ', text)
+puts my_ebook.number_of_cliches
+
+#mixins as class methods
+
+module Finders
+	def find_by_name( name )
+	# Find a document by name...
+	end
+	def find_by_id( doc_id )
+	# Find a document by id
+	end 
+end
+
+class Document
+  # Most of the class omitted...
+	class << self
+		include Finders
+	end 
+end
+
+#shortcut for class methods (singleton)
+
+class Document
+  extend Finders
+  # Most of the class omitted...
+end
