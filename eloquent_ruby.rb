@@ -677,4 +677,7 @@ end
 # Later...
 	admin = print_module::Administration.new
 
-	
+
+#Modules as mixins
+
+
