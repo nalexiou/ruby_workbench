@@ -735,3 +735,6 @@ class Document
   extend Finders
   # Most of the class omitted...
 end
+
+#Use Blocks to Iterate
+
