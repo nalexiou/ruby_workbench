@@ -737,4 +737,63 @@ class Document
 end
 
 #Use Blocks to Iterate
+def do_something_with_an_arg
+	yield("Hello World") if block_given?
+end
+do_something_with_an_arg do |message|
+	puts "The message is #{message}"
+end
+
+#this will print: The message is Hello World
+
+class Document
+	# Most of the class omitted...
+	def each_word_pair
+		word_array = words
+		index = 0
+		while index < (word_array.size-1)
+			yield word_array[index], word_array[index+1]
+		index += 1 
+		end
+	end 
+end
+
+doc = Document.new('Donuts', '?', 'I love donuts mmmm donuts' )
+doc.each_word_pair{ |first, second| puts "#{first} #{second}" }
+
+#this will print the following without generating a four-element array
+I love
+love donuts
+donuts mmmm
+mmmm donuts
+
+#Iterators on steroid: Enumerable
+
+class Document 
+	include Enumerable
+  # Most of the class omitted...
+	def each
+		words.each { |word| yield( word ) }
+	end 
+end
+
+doc = Document.new('Advice', 'Harry', 'Go ahead make my day')
+
+doc.include?("make") #returns true
+doc.include?("Punk") #returns false
+
+
+def each_word_pair
+  words.each_cons(2) {|array| yield array[0], array[1] }
+end
+
+#going further: creating an enumerator instance
+doc = Document.new('example', 'russ', "We are all characters")
+enum = Enumerator.new( doc, :each_character )
+#character count
+puts enum.count
+
+#sorted characters
+pp enum.sort
+
 
