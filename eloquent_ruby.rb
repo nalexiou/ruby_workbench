@@ -796,4 +796,62 @@ puts enum.count
 #sorted characters
 pp enum.sort
 
+#execute around block
+class SomeApplication
+		def do_something
+			with_logging('load') { @doc = Document.load( 'resume.txt' ) }
+			# Do something with the document...
+			with_logging('save') { @doc.save } 
+		end
+		# Rest of the class omitted...
+		def with_logging(description)
+			begin
+			  @logger.debug( "Starting #{description}" )
+			  yield
+			  @logger.debug( "Completed #{description}" )
+			rescue
+			  @logger.error( "#{description} failed!!")
+			  raise
+			end 
+		end
+end
 
+#example of execute around to initialize class
+class Document
+	attr_accessor :title, :author, :content
+	def initialize(title, author, content = '')
+		@title = title
+		@author = author
+		@content = content
+		yield( self ) if block_given?
+	end
+# Rest of the class omitted...
+end
+
+#passing block to a new class instance
+
+new_doc = Document.new( 'US Constitution', 'Madison', '' ) do |d|
+  d.content << 'We the people'
+  d.content << 'In order to form a more perfect union'
+  d.content << 'provide for the common defense'
+end
+
+#carrying answers back using block
+
+def do_something_silly
+  with_logging( 'Compute miles in a light year' ) do
+    186000 * 60 * 60 * 24 * 365
+  end
+end
+
+def with_logging(description)
+	begin
+		@logger.debug( "Starting #{description}" ) 
+		return_value = yield
+		@logger.debug( "Completed #{description}" ) 
+		return_value
+	rescue
+		@logger.error( "#{description} failed!!")
+		raise
+	end 
+end
