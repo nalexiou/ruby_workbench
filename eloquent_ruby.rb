@@ -857,3 +857,10 @@ def with_logging(description)
 end
 
 #save blocks to execute later
+def run_that_block( &that_block )
+	puts "About to run the block"
+	that_block.callputs 
+	"Done running the block"
+end
+
+that_block.call if that_block
