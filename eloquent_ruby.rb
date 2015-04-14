@@ -859,8 +859,34 @@ end
 #save blocks to execute later
 def run_that_block( &that_block )
 	puts "About to run the block"
-	that_block.callputs 
-	"Done running the block"
+	that_block.call
+	puts "Done running the block"
 end
 
 that_block.call if that_block
+
+class DocumentSaveListener
+	def on_save( doc, path)
+		puts "Hey, I've been saved!"
+	end
+end
+class DocumentLoadListener
+	def on_load( doc, path)
+		puts "Hey I've been loaded!"
+	end
+end
+
+class Document
+	attr_accessor :load_listener
+	attr_accessor :save_listener
+  # Most of the class omitted...
+	def load( path )
+		@content = File.read( path )
+		load_listener.on_load( self, path ) if load_listener
+	end
+	def save( path )
+	File.open( path, 'w') { |f| f.print( @contents ) }
+	save_listener.on_save( self, path ) if save_listener
+	end 
+end
+
