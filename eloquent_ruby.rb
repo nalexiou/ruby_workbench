@@ -896,4 +896,75 @@ doc.save_listener = DocumentSaveListener.new
 doc.load( 'example.txt' )
 doc.save( 'example.txt' )
 
+#a better way
+class Document
+  # Most of the class omitted...
+	def on_save( &block )
+		@save_listener = block
+	end
+	def on_load( &block )
+		@load_listener = block
+	end
+	def load( path )
+		@content = File.read( path )
+		@load_listener.call( self, path ) if @load_listener
+	end
+	def save( path )
+		File.open( path, 'w' ) { |f| f.print( @contents ) }
+		@save_listener.call( self, path ) if @save_listener
+	end 
+end
 
+my_doc = Document.new( 'Block Based Example', 'russ', '' )
+my_doc.on_load do |doc|
+  puts "Hey, I've been loaded!"
+end
+my_doc.on_save do |doc|
+  puts "Hey, I've been saved!"
+end
+
+#instead of this (dependent on File)
+class ArchivalDocument
+  attr_reader :title, :author
+	def initialize(title, author,  path)
+		@title = title
+		@author = author
+		@path = path
+	end
+	def content
+		@content ||= File.read( @path )
+	end 
+end
+
+#do this that is way more flexible
+
+class BlockBasedArchivalDocument
+  attr_reader :title, :author
+	def initialize(title, author, &block) @title = title
+		@author = author
+		@initializer_block = block
+	end
+	def content
+		if @initializer_block
+		  @content = @initializer_block.call
+		  @initializer_block = nil
+		end
+		@content 
+	end
+end
+
+#it allows us to do this:
+file_doc =  BlockBasedArchivalDocument.new( 'file', 'russ' ) do
+  File.read( 'some_text.txt' )
+end
+
+#and this
+google_doc = BlockBasedArchivalDocument.new('http', 'russ') do
+  Net::HTTP.get_response('www.google.com', '/index.html').body
+end
+
+#and this
+
+boring_doc = BlockBasedArchivalDocument.new('silly', 'russ') do
+  'Ya' * 100
+end
