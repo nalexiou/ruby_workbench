@@ -890,3 +890,10 @@ class Document
 	end 
 end
 
+doc = Document.new( 'Example', 'Russ', 'It was a dark...' )
+doc.load_listener = DocumentLoadListener.new
+doc.save_listener = DocumentSaveListener.new
+doc.load( 'example.txt' )
+doc.save( 'example.txt' )
+
+
