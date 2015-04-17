@@ -968,3 +968,16 @@ end
 boring_doc = BlockBasedArchivalDocument.new('silly', 'russ') do
   'Ya' * 100
 end
+
+#hooks keep classes informed
+
+class SimpleBaseClass
+  def self.inherited( new_subclass )
+    puts "Hey #{new_subclass} is now a subclass of #{self}!"
+  end
+end
+
+class ChildClassOne < SimpleBaseClass
+end
+
+#this will print: Hey ChildClassOne is now a subclass of SimpleBaseClass!
