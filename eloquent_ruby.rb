@@ -1034,3 +1034,23 @@ end
 		DocumentReader.reader_classes << subclass
 	end
 end
+
+#extending and including shortcut
+
+module UsefulMethods
+	module ClassMethods
+	    def a_class_method
+		end 
+	end
+	def self.included( host_class )
+		host_class.extend( ClassMethods )
+	end
+	def an_instance_method
+	end
+  # Rest of the module deleted...
+end
+
+
+class Host
+  include UsefulMethods
+end
