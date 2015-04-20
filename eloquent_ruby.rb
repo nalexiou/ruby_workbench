@@ -1054,3 +1054,5 @@ end
 class Host
   include UsefulMethods
 end
+
+#method_missing block - handle exceptions
