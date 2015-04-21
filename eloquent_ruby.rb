@@ -1058,3 +1058,13 @@ end
 #method_missing block - handle exceptions
 
 #.......
+
+#method_missing override
+
+class RepeatBackToMe
+	def method_missing( method_name, *args )
+	    puts "Hey, you just called the #{method_name} method"
+	    puts "With these arguments: #{args.join(' ')}"
+	    puts "But there ain't no such method"
+	end 
+end
