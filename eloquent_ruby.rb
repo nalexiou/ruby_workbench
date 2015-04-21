@@ -1056,3 +1056,5 @@ class Host
 end
 
 #method_missing block - handle exceptions
+
+#.......
