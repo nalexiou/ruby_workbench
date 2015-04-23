@@ -1092,3 +1092,16 @@ class Document
 		end
 	end 
 end
+
+#missing constant example - note the class method detail
+
+class Document
+	# Most of the class omitted...
+	def self.const_missing( const_name ) 
+		msg = %Q{
+		You tried to reference the constant #{const_name}
+		There is no such constant in the Document class.
+		}
+		raise msg 
+	end
+end
