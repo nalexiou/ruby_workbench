@@ -1158,3 +1158,5 @@ class SuperSecretDocument < BasicObject
 	 @original_document.send(name, *args)
   end
 end
+
+#method_missing for flexible APIs
