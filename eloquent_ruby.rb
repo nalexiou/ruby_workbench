@@ -1195,3 +1195,11 @@ class FormLetter < Document
 		name_parts[1].upcase
 	end 
 end
+
+#watch out for this:
+letter = FormLetter.new( 'Example', 'Acme', 'The word is WORD' )
+letter.replace_word( 'Abracadabra' )
+
+#since method is already defined you will get this error
+
+#<ArgumentError: wrong number of arguments (1 for 2)>
