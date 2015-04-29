@@ -1203,3 +1203,15 @@ letter.replace_word( 'Abracadabra' )
 #since method is already defined you will get this error
 
 #<ArgumentError: wrong number of arguments (1 for 2)>
+
+#also, method_missing does not get included in the respond_to? method
+
+doc.respond_to?(:words)  # => true
+doc.respond_to?(:abuse)  # => false
+
+#A fix for this could be overriding the method:
+def respond_to?(name)
+  string_name = name.to_s
+  return true if string_name =~ /^replace_\w+/
+  super
+end
