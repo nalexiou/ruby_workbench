@@ -1240,3 +1240,5 @@ def method_missing(mid, *args) # :nodoc:
 		  "undefined method `#{mname}' for #{self}", caller(1)
 	end
 end
+
+#Monkey patching
