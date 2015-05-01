@@ -1215,3 +1215,28 @@ def respond_to?(name)
   return true if string_name =~ /^replace_\w+/
   super
 end
+
+#magic via missing_method in OpenStruct (hash-like) object
+
+require 'otruct'
+author = OpenStruct.new
+author.first_name = 'Stephen'
+author.last_name = 'Hawking'
+puts author.first_name
+puts author.last_name
+
+def method_missing(mid, *args) # :nodoc:
+	mname = mid.id2name
+	len = args.length
+	if mname =~ /=$/
+		# Some error handling deleted... 
+		mname.chop! 
+		self.new_ostruct_member(mname) 
+		@table[mname.intern] = args[0]
+	elsif len == 0
+		@table[mid]
+	else
+		raise NoMethodError,
+		  "undefined method `#{mname}' for #{self}", caller(1)
+	end
+end
