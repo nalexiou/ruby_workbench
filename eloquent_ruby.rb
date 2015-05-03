@@ -1255,3 +1255,43 @@ class String
 	result
 	end 
 end
+
+
+#using alias for methods
+class Document
+	# Stuff omitted...
+	def word_count
+		words.size
+	end
+	alias_method :number_of_words, :word_count
+	alias_method :size_in_words,   :word_count
+	# Stuff omitted...
+end
+
+class String
+	alias_method :old_addition, :+
+	def +( other )
+		if other.kind_of? Document
+		  new_content = self + other.content
+		  return Document.new(other.title, other.author, new_content)
+	end
+		old_addition(other)
+	end 
+end
+
+#make method private
+class Document
+  private :word_count
+end
+
+#make method public
+class Document
+  public :word_count
+end
+
+#remove method
+class Document
+  remove_method :word_count
+end
+
+#self modifying classes
