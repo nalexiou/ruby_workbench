@@ -1295,3 +1295,8 @@ class Document
 end
 
 #self modifying classes
+
+#ruby class definitions are executable
+class MostlyEmpty
+	puts "hello from inside the class"
+end
