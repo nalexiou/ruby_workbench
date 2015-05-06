@@ -1315,3 +1315,90 @@ class StructuredDocument
 	end
 # ... 
 end
+
+#sample internal DSL (Domain Specific Languages)
+require "rexml/document"
+class XmlRipper
+	def initialize(&block)
+		@before_action = proc {}
+		@path_actions = {}
+		@after_action = proc {}
+		block.call( self ) if block
+	end
+	def on_path( path, &block )
+		@path_actions[path] = block
+	end
+	def before( &block )
+		before_action = block
+	end
+	def after( &block )
+		@after_action = block
+	end
+	def run( xml_file_path )
+		File.open( xml_file_path ) do |f|
+		  document = REXML::Document.new(f)
+		  @before_action.call( document )
+		  run_path_actions( document )
+		  @after_action.call( document )
+		end 
+	end
+	def run_path_actions( document )
+		@path_actions.each do |path, block|
+			REXML::XPath.each(document, path) do |element|
+				block.call( element )
+			end 
+		end
+	end
+end
+
+#we can now do this
+ripper = XmlRipper.new do |r|
+  r.on_path( '/document/author' ) { |a| puts a.text }
+  r.on_path( '/document/chapter/title' ) { |t| puts t.text }
+end
+ripper.run( 'fellowship.xml' )
+
+#to make better, use instance_eval:
+
+class XmlRipper
+	def initialize(&block) 
+		@before_action = proc {} 
+		@path_actions = {} 
+		@after_action = proc {} 
+		instance_eval( &block ) if block
+	end
+  # Rest of the class omitted...
+end
+
+#now we have this:
+
+ripper = XmlRipper.new do
+  on_path( '/document/author' ) do |author|
+    author.text = 'J.R.R. Tolkien'
+  end
+  after { |doc| puts doc }
+end
+ripper.run( 'fellowship.xml' )
+
+#reduce code doen with this
+
+class XmlRipper
+	def initialize_from_file( path )
+		instance_eval( File.read( path ) )
+	end
+  # Rest of the class omitted...
+end
+
+#add your xpath code in a file and then run this code
+#file would have ruby code text: 
+######
+on_path( '/document/author' ) do |author|
+ author.text = 'J.R.R. Tolkien'
+end
+after { |doc| puts doc }
+####
+
+
+ripper = XmlRipper.new
+ripper.initialize_from_file( 'fix_author.ripper' )
+ripper.run( 'fellowship.xml')
