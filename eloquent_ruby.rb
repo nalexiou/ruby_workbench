@@ -1402,3 +1402,12 @@ after { |doc| puts doc }
 ripper = XmlRipper.new
 ripper.initialize_from_file( 'fix_author.ripper' )
 ripper.run( 'fellowship.xml')
+
+#Building external DSL
+##We have this syntax
+on_path( '/document/author' ) { |author| puts author.text }
+#But users want a parser that can take input like this
+
+delete /document/published
+replace /document/author Tolkien
+
