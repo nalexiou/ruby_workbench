@@ -1500,3 +1500,31 @@ def parse_statement( statement )
 		raise "Don't know what to do with: #{statement}"
 	end
 end
+
+#alternative to parser using Treetop -> a language for describing languages 
+grammar EzRipperStatement
+	rule statement
+		comment/delete_statement/replace_statement/print_statement
+	end
+	rule comment
+			"#" .*
+	end
+	rule delete_statement
+		"delete" sp quoted_argument sp
+	end
+	rule replace_statement
+		"replace" sp quoted_argument sp quoted_argument sp
+	end
+	rule print_statement
+		"filter" sp quoted_argument sp
+	end
+	rule quoted_argument
+		"'" argument "'"
+	end
+	rule argument
+		(!"'" . )*
+	end
+	rule sp
+		[ \t\n]*
+	end
+end
