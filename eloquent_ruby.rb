@@ -1528,3 +1528,14 @@ grammar EzRipperStatement
 		[ \t\n]*
 	end
 end
+
+#compile using treetop compiler gets us this:  tt ez_ripper_statement.tt
+
+#to run treetop and revised ezripper we use this:
+require 'treetop'
+require 'ez_ripper_statement'
+statement =  "replace '/document/author' 'Russ Olsen'"
+parser = EzRipperStatementParser.new
+parse_tree = parser.parse( statement )
+
+#HAML and ERB also is an external DSL that uses parsing to generate the HTML code 
