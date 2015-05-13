@@ -1539,3 +1539,19 @@ parser = EzRipperStatementParser.new
 parse_tree = parser.parse( statement )
 
 #HAML and ERB also is an external DSL that uses parsing to generate the HTML code 
+
+#ruby (under the hood) implementation in C
+
+rb_cObject = boot_defclass("Object", 0);
+rb_cModule = boot_defclass("Module", rb_cObject);
+rb_cClass =  boot_defclass("Class",  rb_cModule);
+
+#collect! implementation
+static VALUE
+rb_ary_collect_bang(ary)
+VALUE ary; {
+long i;
+rb_ary_modify(ary);
+for (i = 0; i < RARRAY(ary)->len; i++) {
+rb_ary_store(ary, i, rb_yield(RARRAY(ary)->ptr[i])); }
+return ary; }
